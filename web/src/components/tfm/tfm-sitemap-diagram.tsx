@@ -32,6 +32,8 @@ export function TfmSitemapDiagram() {
       <div className="mx-auto flex max-w-xl flex-col items-stretch">
         <Node href="/">Inicio (presentación del TFM)</Node>
         <ArrowDown />
+        <Node href="/explorar-tfm">Grupo · presentación del equipo</Node>
+        <ArrowDown />
         <div className="grid gap-2 sm:grid-cols-2">
           {tfmMainNav.map((item) => (
             <Node key={item.href} href={item.href}>

@@ -2,6 +2,7 @@ export type TfmNavItem = { href: string; label: string; short?: string };
 
 /** Navegación principal alineada con el sitemap del TFM (web académica EAE). */
 export const tfmMainNav: TfmNavItem[] = [
+  { href: "/mision-vision", label: "Misión y visión", short: "Misión" },
   { href: "/justificacion", label: "Justificación y objetivos", short: "Justificación" },
   { href: "/mapa-contenidos", label: "Mapa de contenidos", short: "Contenidos" },
   { href: "/arquitectura", label: "Arquitectura y sitemap", short: "Arquitectura" },

@@ -23,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
+    {
+      url: `${base}/explorar-tfm`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
     ...tfmMainNav.map((item) => ({
       url: `${base}${item.href}`,
       lastModified,

@@ -3,12 +3,11 @@ import type { MetadataRoute } from "next";
 import { tfmMainNav } from "@/lib/tfm-nav";
 import { getSiteBaseUrl } from "@/lib/site-url";
 
-/** Rutas con más peso semántico (TFM, producto, mercado, arquitectura). */
+/** Rutas con más peso semántico (TFM, producto, mercado). */
 const HIGH_PRIORITY = new Set<string>([
   "/justificacion",
   "/producto",
   "/estudio-de-mercado",
-  "/arquitectura",
   "/mapa-contenidos",
 ]);
 

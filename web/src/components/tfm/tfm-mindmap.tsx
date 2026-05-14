@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
-import { BookOpen, FileText, Users } from "lucide-react";
+import { BookOpen, FileText } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
@@ -36,17 +36,10 @@ const columns: Column[] = [
   },
   {
     id: "c2",
-    title: "Producto y desarrollo",
-    subtitle: "Solución y web",
+    title: "Producto y operación",
+    subtitle: "Mercado, solución, web y marketing",
     Icon: BookOpen,
-    items: tfmMainNav.slice(4, 7),
-  },
-  {
-    id: "c3",
-    title: "IA, equipo y difusión",
-    subtitle: "Operación y comunicación",
-    Icon: Users,
-    items: tfmMainNav.slice(7, 10),
+    items: tfmMainNav.slice(4, 8),
   },
 ];
 
@@ -132,7 +125,7 @@ export function TfmMindmap() {
         }}
       >
         <p className="mb-6 max-w-xl text-center text-sm text-slate-600">
-          Organizador en tres ramas (inspirado en plantillas académicas): desde el tema central abres cada
+          Organizador en dos ramas (inspirado en plantillas académicas): desde el tema central abres cada
           columna y navegas a la sección del TFM.
         </p>
 
@@ -185,8 +178,8 @@ export function TfmMindmap() {
             </motion.div>
           </div>
 
-          {/* Tres columnas */}
-          <div className="relative z-10 grid gap-8 md:grid-cols-3 md:gap-6 lg:gap-8">
+          {/* Dos columnas */}
+          <div className="relative z-10 grid gap-8 md:grid-cols-2 md:gap-8 lg:gap-10">
             {columns.map((col, colIndex) => (
               <motion.div
                 key={col.id}

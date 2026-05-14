@@ -51,15 +51,32 @@ const marketTiers: MarketTier[] = [
 ];
 
 const competitors = [
-  { name: "ChatGPT", strength: "IA generalista", weakness: "Sin especialización en contenido", logo: "🤖" },
-  { name: "Jasper", strength: "Marketing copy", weakness: "Costoso, sin video", logo: "✍️" },
-  { name: "VidIQ", strength: "SEO YouTube", weakness: "Solo YouTube", logo: "📊" },
-  { name: "Descript", strength: "Edición video", weakness: "Sin redacción", logo: "🎬" },
+  { name: "ChatGPT", strength: "IA generalista", weakness: "Sin especialización en contenido", monogram: "C" },
+  { name: "Jasper", strength: "Marketing copy", weakness: "Costoso, sin video", monogram: "J" },
+  { name: "VidIQ", strength: "SEO YouTube", weakness: "Solo YouTube", monogram: "V" },
+  { name: "Descript", strength: "Edición video", weakness: "Sin redacción", monogram: "D" },
 ];
+
+/** Punto sobre la circunferencia (0° = derecha, 90° = abajo, estándar SVG). */
+function polarDeg(cx: number, cy: number, r: number, deg: number) {
+  const rad = (deg * Math.PI) / 180;
+  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+}
+
+/** Ángulo y altura del bloque de texto (línea base del valor) por anillo — líneas guía hacia la derecha. */
+const RING_CALLOUT: Record<string, { angleDeg: number; valueBaseline: number }> = {
+  tam: { angleDeg: -34, valueBaseline: 96 },
+  sam: { angleDeg: -7, valueBaseline: 150 },
+  som: { angleDeg: 22, valueBaseline: 206 },
+};
+
+const DIAGRAM_CX = 124;
+const DIAGRAM_CY = 150;
+const DIAGRAM_R_MAX = 106;
 
 export function TfmMarketAnalysis() {
   const reduceMotion = useReducedMotion();
-  const [activeTier, setActiveTier] = useState<string>("tam");
+  const [activeTier, setActiveTier] = useState<string>("som");
   const [activeView, setActiveView] = useState<"market" | "competition">("market");
 
   const fadeIn = {
@@ -71,7 +88,7 @@ export function TfmMarketAnalysis() {
     },
   };
 
-  const selectedTier = marketTiers.find((t) => t.id === activeTier) ?? marketTiers[0];
+  const ringRadii = marketTiers.map((t) => (t.size / 100) * DIAGRAM_R_MAX);
 
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col overflow-hidden">
@@ -138,77 +155,138 @@ export function TfmMarketAnalysis() {
             {/* Círculos concéntricos */}
             <div className="relative flex min-h-[200px] flex-1 items-center justify-center lg:min-h-0">
               <svg
-                viewBox="0 0 300 300"
-                className="h-full max-h-[280px] w-full max-w-[280px] sm:max-h-[320px] sm:max-w-[320px]"
+                viewBox="0 0 318 300"
+                className="h-full max-h-[280px] w-full max-w-[min(100%,20rem)] sm:max-h-[320px]"
+                aria-label="Diagrama TAM, SAM y SOM: siglas dentro de cada anillo y valores fuera"
               >
                 {marketTiers.map((tier, i) => {
-                  const r = (tier.size / 100) * 120;
+                  const r = ringRadii[i];
                   const isActive = activeTier === tier.id;
                   return (
-                    <g key={tier.id}>
-                      <motion.circle
-                        cx="150"
-                        cy="150"
-                        r={r}
-                        fill={isActive ? `${tier.color}15` : `${tier.color}08`}
-                        stroke={tier.color}
-                        strokeWidth={isActive ? 3 : 1.5}
-                        strokeDasharray={isActive ? "none" : "4 2"}
-                        className="cursor-pointer transition-all"
-                        onClick={() => setActiveTier(tier.id)}
-                        initial={reduceMotion ? {} : { scale: 0, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{
-                          delay: reduceMotion ? 0 : 0.2 + i * 0.15,
-                          duration: 0.5,
-                          type: "spring",
-                          stiffness: 200,
-                        }}
-                        whileHover={{ strokeWidth: 3 }}
-                      />
+                    <motion.circle
+                      key={tier.id}
+                      cx={DIAGRAM_CX}
+                      cy={DIAGRAM_CY}
+                      r={r}
+                      fill={isActive ? `${tier.color}18` : `${tier.color}08`}
+                      stroke={tier.color}
+                      strokeWidth={isActive ? 3 : 1.5}
+                      strokeDasharray={isActive ? "none" : "5 3"}
+                      strokeLinecap="round"
+                      className="cursor-pointer transition-all"
+                      onClick={() => setActiveTier(tier.id)}
+                      initial={reduceMotion ? {} : { scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{
+                        delay: reduceMotion ? 0 : 0.15 + i * 0.12,
+                        duration: 0.5,
+                        type: "spring",
+                        stiffness: 200,
+                      }}
+                      whileHover={{ strokeWidth: 3 }}
+                    />
+                  );
+                })}
+
+                {/* Siglas dentro del anillo que corresponde (TAM/SAM franja media; SOM centro) */}
+                <g className="pointer-events-none select-none">
+                  {marketTiers.map((tier, i) => {
+                    const isActive = activeTier === tier.id;
+                    if (tier.id === "som") {
+                      return (
+                        <motion.text
+                          key={`ring-label-${tier.id}`}
+                          x={DIAGRAM_CX}
+                          y={DIAGRAM_CY}
+                          textAnchor="middle"
+                          dominantBaseline="central"
+                          fill={tier.color}
+                          fontSize={isActive ? 16 : 14}
+                          fontWeight={700}
+                          letterSpacing="0.06em"
+                          initial={reduceMotion ? {} : { opacity: 0 }}
+                          animate={{ opacity: isActive ? 1 : 0.88 }}
+                          transition={{ duration: 0.25 }}
+                        >
+                          {tier.label}
+                        </motion.text>
+                      );
+                    }
+                    const rOuter = ringRadii[i];
+                    const rInner = ringRadii[i + 1] ?? 0;
+                    const rMid = (rOuter + rInner) / 2;
+                    const p = polarDeg(DIAGRAM_CX, DIAGRAM_CY, rMid, -90);
+                    return (
                       <motion.text
-                        x="150"
-                        y={150 - r + 20}
+                        key={`ring-label-${tier.id}`}
+                        x={p.x}
+                        y={p.y}
                         textAnchor="middle"
+                        dominantBaseline="central"
                         fill={tier.color}
-                        fontSize={isActive ? 14 : 11}
-                        fontWeight={isActive ? 700 : 500}
-                        className="pointer-events-none select-none"
+                        fontSize={tier.id === "tam" ? (isActive ? 17 : 15) : isActive ? 15 : 13}
+                        fontWeight={700}
+                        letterSpacing="0.08em"
                         initial={reduceMotion ? {} : { opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: reduceMotion ? 0 : 0.4 + i * 0.1 }}
+                        animate={{ opacity: isActive ? 1 : 0.88 }}
+                        transition={{ duration: 0.25 }}
                       >
                         {tier.label}
                       </motion.text>
-                    </g>
+                    );
+                  })}
+                </g>
+
+                {marketTiers.map((tier, i) => {
+                  const r = ringRadii[i];
+                  const { angleDeg, valueBaseline } = RING_CALLOUT[tier.id] ?? {
+                    angleDeg: 0,
+                    valueBaseline: 150,
+                  };
+                  const edge = polarDeg(DIAGRAM_CX, DIAGRAM_CY, r, angleDeg);
+                  const isActive = activeTier === tier.id;
+                  const textX = 256;
+                  const lineEndX = textX - 6;
+                  const lineEndY = valueBaseline - 3;
+                  return (
+                    <motion.g
+                      key={`callout-${tier.id}`}
+                      initial={reduceMotion ? {} : { opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: reduceMotion ? 0 : 0.45 + i * 0.12 }}
+                      className="pointer-events-none select-none"
+                    >
+                      <line
+                        x1={edge.x}
+                        y1={edge.y}
+                        x2={lineEndX}
+                        y2={lineEndY}
+                        stroke={tier.color}
+                        strokeWidth={isActive ? 2 : 1.35}
+                        strokeOpacity={isActive ? 0.95 : 0.75}
+                        strokeLinecap="round"
+                      />
+                      <circle
+                        cx={edge.x}
+                        cy={edge.y}
+                        r={isActive ? 3.25 : 2.5}
+                        fill={tier.color}
+                        stroke="#fff"
+                        strokeWidth={1.5}
+                      />
+                      <text
+                        x={textX}
+                        y={valueBaseline}
+                        textAnchor="start"
+                        fill={tier.color}
+                        fontSize={14}
+                        fontWeight={700}
+                      >
+                        {tier.value}
+                      </text>
+                    </motion.g>
                   );
                 })}
-                {/* Centro: valor activo */}
-                <motion.text
-                  x="150"
-                  y="145"
-                  textAnchor="middle"
-                  fill={selectedTier.color}
-                  fontSize="28"
-                  fontWeight="700"
-                  className="select-none"
-                  key={selectedTier.value}
-                  initial={reduceMotion ? {} : { scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {selectedTier.value}
-                </motion.text>
-                <text
-                  x="150"
-                  y="168"
-                  textAnchor="middle"
-                  fill="#64748b"
-                  fontSize="10"
-                  className="select-none"
-                >
-                  {selectedTier.fullLabel}
-                </text>
               </svg>
             </div>
 
@@ -268,7 +346,12 @@ export function TfmMarketAnalysis() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: reduceMotion ? 0 : i * 0.1 }}
               >
-                <div className="mb-2 text-2xl">{comp.logo}</div>
+                <div
+                  className="mb-2 flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-xs font-bold text-slate-700"
+                  aria-hidden
+                >
+                  {comp.monogram}
+                </div>
                 <h3 className="text-sm font-semibold text-slate-900">{comp.name}</h3>
                 <div className="mt-2 flex-1 space-y-1.5">
                   <div>
@@ -295,7 +378,12 @@ export function TfmMarketAnalysis() {
               transition={{ delay: reduceMotion ? 0 : 0.5 }}
             >
               <div className="flex items-center gap-2">
-                <span className="text-xl">🐧</span>
+                <div
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-cyan-400/60 bg-white/80 text-xs font-bold text-cyan-900"
+                  aria-hidden
+                >
+                  PW
+                </div>
                 <h3 className="text-base font-bold text-cyan-900 sm:text-lg">
                   Penguin Writer
                 </h3>
@@ -305,7 +393,7 @@ export function TfmMarketAnalysis() {
               </div>
               <p className="mt-2 text-xs text-cyan-800 sm:text-sm">
                 <strong>Flujo integrado único:</strong> Guionista + Editor + Distribuidor en una
-                sola plataforma. Voz personalizada con IA. Precio competitivo desde 19$/mes.
+                sola plataforma. Voz personalizada con IA. Plan Pro desde 39 $/mes y Agency 69 $/mes.
               </p>
             </motion.div>
           </motion.div>

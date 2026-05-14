@@ -22,7 +22,7 @@ const plans = [
   {
     id: "pro",
     name: "Pro",
-    price: "$19",
+    price: "$39",
     period: "/mes",
     description: "Para creadores individuales",
     features: ["500 créditos/mes", "5 proyectos", "Voz personalizada", "Exportar video"],
@@ -31,7 +31,7 @@ const plans = [
   {
     id: "agency",
     name: "Agency",
-    price: "$39",
+    price: "$69",
     period: "/mes",
     description: "Para equipos y agencias",
     features: ["Créditos ilimitados", "Proyectos ilimitados", "3 voces", "API access", "Soporte prioritario"],

@@ -7,13 +7,9 @@ import {
   Code2,
   FileText,
   Home,
-  Layout,
   Map,
   Megaphone,
-  Sparkles,
-  Users,
   UsersRound,
-  Video,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -28,25 +24,15 @@ const groups = [
       { path: "/justificacion", label: "Justificación", icon: FileText, content: "Objetivos y justificación" },
       { path: "/estudio-de-mercado", label: "Mercado", icon: BarChart3, content: "TAM/SAM/SOM, competencia" },
       { path: "/producto", label: "Producto", icon: BookOpen, content: "Customer journey, pricing" },
-      { path: "/equipo", label: "Equipo", icon: Users, content: "Integrantes y roles" },
     ],
   },
   {
-    type: "Estructural",
+    type: "Estructural y difusión",
     color: "#3b82f6",
     sections: [
       { path: "/mapa-contenidos", label: "Mapa", icon: Map, content: "Inventario y clasificación" },
-      { path: "/arquitectura", label: "Arquitectura", icon: Layout, content: "Sitemap y stack técnico" },
       { path: "/desarrollo-web", label: "Desarrollo", icon: Code2, content: "Plantillas y navegación" },
-    ],
-  },
-  {
-    type: "Cumplimiento",
-    color: "#f59e0b",
-    sections: [
-      { path: "/marketing-digital", label: "Marketing", icon: Megaphone, content: "Plan de canales y KPIs" },
-      { path: "/inteligencia-artificial", label: "IA", icon: Sparkles, content: "Declaración de uso de IA" },
-      { path: "/multimedia", label: "Multimedia", icon: Video, content: "Tour y vídeo del grupo" },
+      { path: "/marketing-digital", label: "Marketing", icon: Megaphone, content: "Plan de presupuesto por fases" },
     ],
   },
 ];
@@ -117,15 +103,15 @@ export function TfmContentMapSlide() {
           <div className="h-5 w-px bg-slate-300" />
         </div>
 
-        {/* Ramas: línea horizontal + 3 columnas */}
+        {/* Ramas: línea horizontal + 2 columnas */}
         <motion.div
-          className="relative min-h-0 flex-1 grid grid-cols-3 gap-4"
+          className="relative min-h-0 flex-1 grid grid-cols-1 gap-4 sm:grid-cols-2"
           variants={stagger}
         >
           {/* Línea horizontal conectora */}
           <div
-            className="pointer-events-none absolute top-0 h-px bg-slate-300"
-            style={{ left: "16.667%", right: "16.667%" }}
+            className="pointer-events-none absolute top-0 hidden h-px bg-slate-300 sm:block"
+            style={{ left: "8%", right: "8%" }}
           />
 
           {groups.map((group) => (

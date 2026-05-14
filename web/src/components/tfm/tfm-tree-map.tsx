@@ -45,16 +45,6 @@ const tfmTree: TreeNode = {
       ],
     },
     {
-      id: "arquitectura",
-      label: "Arquitectura y sitemap",
-      href: "/arquitectura",
-      children: [
-        { id: "arq-1", label: "Diagrama técnico" },
-        { id: "arq-2", label: "Stack tecnológico" },
-        { id: "arq-3", label: "Flujo de datos" },
-      ],
-    },
-    {
       id: "mercado",
       label: "Estudio de mercado",
       href: "/estudio-de-mercado",
@@ -92,33 +82,6 @@ const tfmTree: TreeNode = {
         { id: "mkt-1", label: "SEO" },
         { id: "mkt-2", label: "Redes sociales" },
         { id: "mkt-3", label: "Email marketing" },
-      ],
-    },
-    {
-      id: "ia",
-      label: "Uso de IA",
-      href: "/inteligencia-artificial",
-      children: [
-        { id: "ia-1", label: "Herramientas usadas" },
-        { id: "ia-2", label: "Prompts y flujos" },
-      ],
-    },
-    {
-      id: "equipo",
-      label: "Equipo",
-      href: "/equipo",
-      children: [
-        { id: "eq-1", label: "Miembros" },
-        { id: "eq-2", label: "Roles" },
-      ],
-    },
-    {
-      id: "multimedia",
-      label: "Vídeos",
-      href: "/multimedia",
-      children: [
-        { id: "vid-1", label: "Demo del producto" },
-        { id: "vid-2", label: "Presentación" },
       ],
     },
   ],

@@ -12,7 +12,7 @@ const pairs = [
   },
   {
     problem: { icon: Banknote, title: "$150 al mes", desc: "en suscripciones dispersas sin integración" },
-    solution: { icon: DollarSign, title: "Desde 19 $/mes", desc: "Reemplaza múltiples suscripciones con un solo precio accesible" },
+    solution: { icon: DollarSign, title: "Desde 39 $/mes", desc: "Reemplaza múltiples suscripciones con un solo precio accesible" },
   },
   {
     problem: { icon: UserX, title: "Sin voz propia", desc: "Contenido genérico que no refleja tu identidad" },

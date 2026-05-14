@@ -5,7 +5,7 @@ import { TfmPageShell } from "@/components/tfm/tfm-page-shell";
 
 export const metadata: Metadata = {
   title: "Marketing digital · TFM Penguin Writer",
-  description: "Plan de marketing de Penguin Writer: canales, KPIs y embudo de conversión.",
+  description: "Reparto del presupuesto de marketing por fase del embudo (captación, awareness, conversión, fidelización).",
 };
 
 export default function MarketingDigitalPage() {

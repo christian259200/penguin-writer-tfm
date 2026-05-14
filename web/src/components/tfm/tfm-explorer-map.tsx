@@ -4,15 +4,11 @@ import { motion } from "framer-motion";
 import {
   BookOpen,
   Building2,
-  Code2,
   FileText,
   Lightbulb,
   Map,
   Megaphone,
-  MonitorPlay,
-  Sparkles,
   Target,
-  Users,
 } from "lucide-react";
 import Link from "next/link";
 import type { ComponentType } from "react";
@@ -23,14 +19,10 @@ import { cn } from "@/lib/utils";
 const iconMap: Record<string, ComponentType<{ className?: string }>> = {
   "/justificacion": Target,
   "/mapa-contenidos": Map,
-  "/arquitectura": Code2,
   "/estudio-de-mercado": Building2,
   "/producto": Lightbulb,
   "/desarrollo-web": FileText,
   "/marketing-digital": Megaphone,
-  "/inteligencia-artificial": Sparkles,
-  "/equipo": Users,
-  "/multimedia": MonitorPlay,
 };
 
 const containerVariants = {

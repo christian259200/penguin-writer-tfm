@@ -95,7 +95,7 @@ const stages: Stage[] = [
   {
     id: "purchase",
     title: "Compra",
-    top: "Elige plan Pro (19 $/mes) o Agency (39 $/mes) y confirma la suscripción.",
+    top: "Elige plan Pro (39 $/mes) o Agency (69 $/mes) y confirma la suscripción.",
     bottom:
       "Fidelización: integra Penguin Writer en el flujo semanal y recomienda a su red profesional.",
     panel:

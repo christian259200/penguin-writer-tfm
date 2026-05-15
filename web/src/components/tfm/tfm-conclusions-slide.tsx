@@ -90,6 +90,17 @@ export function TfmConclusionsSlide() {
             </div>
           </motion.div>
         ))}
+
+        <motion.footer
+          className="mt-1 shrink-0 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-600 px-4 py-3 shadow-md shadow-cyan-200/50 sm:mt-2 sm:px-5 sm:py-3.5"
+          initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: reduceMotion ? 0 : 0.35 }}
+        >
+          <p className="text-center text-[11px] font-semibold leading-snug text-white sm:text-sm md:text-base">
+            Penguin Writer: autenticidad escalable para la nueva economía de creadores
+          </p>
+        </motion.footer>
       </div>
     </div>
   );

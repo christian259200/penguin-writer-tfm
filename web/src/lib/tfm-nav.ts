@@ -40,6 +40,7 @@ export const tfmMainNav: TfmNavItem[] = [
     short: "Riesgos",
   },
   { href: "/conclusiones", label: "Conclusiones del proyecto", short: "Conclusiones" },
+  { href: "/cierre", label: "Cierre y preguntas", short: "Cierre" },
 ];
 
 export const demoHeroNav = [

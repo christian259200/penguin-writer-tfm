@@ -12,6 +12,7 @@ import {
   Mail,
   Map,
   Megaphone,
+  MessageCircleQuestion,
   Milestone,
   PieChart,
   ShieldAlert,
@@ -38,6 +39,7 @@ const iconMap: Record<string, ComponentType<{ className?: string }>> = {
   "/plan-financiero": Wallet,
   "/plan-contingencias": ShieldAlert,
   "/conclusiones": Flag,
+  "/cierre": MessageCircleQuestion,
 };
 
 const containerVariants = {

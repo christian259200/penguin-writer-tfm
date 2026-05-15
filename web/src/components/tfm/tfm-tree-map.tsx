@@ -92,6 +92,7 @@ const tfmTree: TreeNode = {
         { id: "c-fin", label: "Plan financiero", href: "/plan-financiero" },
         { id: "c-cont", label: "Contingencias", href: "/plan-contingencias" },
         { id: "c-conc", label: "Conclusiones", href: "/conclusiones" },
+        { id: "c-final", label: "Cierre y preguntas", href: "/cierre" },
       ],
     },
   ],

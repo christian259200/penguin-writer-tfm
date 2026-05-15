@@ -167,6 +167,30 @@ export function TfmMarketingStrategySlide() {
               </div>
             ))}
           </div>
+
+          {/* KPIs de resumen */}
+          <motion.div
+            className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:mt-5 sm:gap-3"
+            initial={reduceMotion ? false : { opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: reduceMotion ? 0 : 0.25 }}
+          >
+            {[
+              { label: "Inversión total", value: "100.000€" },
+              { label: "Ejecución", value: "12 meses" },
+              { label: "Canales principales", value: "4" },
+            ].map((k) => (
+              <div
+                key={k.label}
+                className="min-w-[7.5rem] rounded-xl border border-cyan-100 bg-gradient-to-b from-cyan-50/90 to-white px-3 py-2 text-center shadow-sm sm:min-w-[9rem]"
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-wide text-cyan-800 sm:text-[11px]">
+                  {k.label}
+                </p>
+                <p className="mt-0.5 text-sm font-bold tabular-nums text-slate-900 sm:text-base">{k.value}</p>
+              </div>
+            ))}
+          </motion.div>
         </div>
 
         <p className="shrink-0 border-t border-slate-200/70 pt-2 text-center text-[9px] font-medium text-slate-500 sm:text-[10px]">

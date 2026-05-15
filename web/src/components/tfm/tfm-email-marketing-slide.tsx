@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { HeartHandshake, Mail, Sparkles, UserPlus, Users } from "lucide-react";
+import { Gift, HeartHandshake, Mail, ShieldAlert, Sparkles } from "lucide-react";
 import { useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -17,7 +17,7 @@ const tabs: { id: TabId; label: string }[] = [
 ];
 
 const welcomeSequence = [
-  { day: "Día 0", title: 'Bienvenida + acceso a créditos gratis' },
+  { day: "Día 0", title: "Bienvenida + acceso a créditos gratis" },
   { day: "Día 2", title: "Demo interactiva: crea tu primer script" },
   { day: "Día 5", title: "Caso de éxito: cómo [coach] ahorró 10h/semana" },
   { day: "Día 7", title: "Tus créditos se agotan — desbloquea Pro" },
@@ -26,32 +26,52 @@ const welcomeSequence = [
 const upgradeSequence = [
   {
     trigger: "Trigger: 80% créditos usados",
-    title: "Has creado X scripts — mira todo lo que podrías hacer",
+    title:
+      "Has creado X scripts — mira todo lo que puedes hacer con Pro",
   },
-  { trigger: "+48h", title: "Caso de éxito de tu nicho" },
-  { trigger: "+48h", title: "Oferta flash 48h: 20% dto primer mes Pro" },
+  {
+    trigger: "+48h",
+    title:
+      "Caso de éxito: cómo un coach de tu nicho duplicó su engagement",
+  },
+  {
+    trigger: "+48h",
+    title: "Oferta flash 48h: 20% dto en tu primer mes Pro",
+  },
 ];
 
-const loyaltyFlows = [
+const loyaltyCards = [
   {
     title: "Retención",
-    desc: "Emails mensuales con ROI del usuario",
+    body: "Emails mensuales con ROI personalizado del usuario",
+    meta: "Frecuencia: mensual",
     Icon: HeartHandshake,
+    accent: "ring-cyan-500/30",
+    iconBg: "bg-cyan-600",
   },
   {
-    title: "Upsell Pro→Agency",
-    desc: "Trigger por alto consumo de créditos",
+    title: "Upsell Pro → Agency",
+    body: "Trigger: alto consumo de créditos",
+    meta: "Secuencia de 3 emails",
     Icon: Sparkles,
+    accent: "ring-teal-500/30",
+    iconBg: "bg-teal-600",
   },
   {
-    title: "Referidos",
-    desc: "Invita colegas, gana créditos gratis",
-    Icon: UserPlus,
+    title: "Programa de referidos",
+    body: "Invita colegas, gana créditos gratis",
+    meta: "Target: 20% participación",
+    Icon: Gift,
+    accent: "ring-sky-500/30",
+    iconBg: "bg-sky-600",
   },
   {
     title: "Anti-churn",
-    desc: "Rescate por inactividad 7+ días",
-    Icon: Users,
+    body: "Trigger: inactividad +7 días",
+    meta: "Secuencia de rescate con oferta personalizada",
+    Icon: ShieldAlert,
+    accent: "ring-emerald-500/30",
+    iconBg: "bg-emerald-600",
   },
 ];
 
@@ -213,6 +233,9 @@ export function TfmEmailMarketingSlide() {
                 }))}
                 showTrigger
               />
+              <p className="text-center text-[9px] italic text-slate-500 sm:text-[10px]">
+                Trigger: se activa automáticamente al consumir 80% de créditos gratuitos
+              </p>
               <div className="rounded-lg border border-cyan-100 bg-cyan-50/80 px-3 py-2 text-center text-[10px] text-slate-700 sm:text-[11px]">
                 Métricas target · Open rate:{" "}
                 <strong className="text-slate-900">40%</strong> · CTR:{" "}
@@ -234,27 +257,38 @@ export function TfmEmailMarketingSlide() {
                 Flujos automatizados
               </p>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                {loyaltyFlows.map(({ title, desc, Icon }, i) => (
-                  <motion.div
-                    key={title}
+                {loyaltyCards.map((c, i) => (
+                  <motion.article
+                    key={c.title}
                     initial={reduceMotion ? false : { opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: reduceMotion ? 0 : 0.05 * i }}
-                    className="flex gap-2.5 rounded-xl border border-slate-200/90 bg-slate-50/90 px-3 py-2.5"
+                    className={cn(
+                      "flex min-h-0 flex-col rounded-lg border border-slate-200/95 bg-white px-3 py-2.5 ring-1",
+                      c.accent,
+                    )}
                   >
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-cyan-100 text-cyan-800">
-                      <Icon className="h-4 w-4" strokeWidth={2} aria-hidden />
+                    <div className="flex items-start gap-2 border-b border-slate-100 pb-2">
+                      <span
+                        className={cn(
+                          "flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-white",
+                          c.iconBg,
+                        )}
+                        aria-hidden
+                      >
+                        <c.Icon className="h-4 w-4" strokeWidth={2} />
+                      </span>
+                      <h3 className="text-[11px] font-bold text-slate-900 sm:text-xs">{c.title}</h3>
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-[11px] font-semibold text-slate-900 sm:text-xs">{title}</p>
-                      <p className="mt-0.5 text-[10px] leading-snug text-slate-600 sm:text-[11px]">{desc}</p>
-                    </div>
-                  </motion.div>
+                    <p className="mt-2 text-[10px] leading-snug text-slate-700 sm:text-[11px]">{c.body}</p>
+                    <p className="mt-1.5 text-[9px] font-semibold text-cyan-800 sm:text-[10px]">{c.meta}</p>
+                  </motion.article>
                 ))}
               </div>
               <div className="rounded-lg border border-cyan-100 bg-cyan-50/80 px-3 py-2 text-center text-[10px] text-slate-700 sm:text-[11px]">
-                Churn target &lt; <strong className="text-slate-900">4%</strong> anual ·{" "}
-                <strong className="text-slate-900">20%</strong> participación en referidos
+                Churn target &lt; <strong className="text-slate-900">4%</strong> anual · Tasa retención:{" "}
+                <strong className="text-slate-900">96%</strong> ·{" "}
+                <strong className="text-slate-900">2</strong> referidos por participante
               </div>
             </motion.div>
           )}

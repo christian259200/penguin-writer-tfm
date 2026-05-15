@@ -4,12 +4,19 @@ import { motion, useReducedMotion } from "framer-motion";
 import {
   BarChart3,
   BookOpen,
-  Code2,
   FileText,
+  Flag,
   Home,
+  LayoutDashboard,
+  ListOrdered,
+  Mail,
   Map,
   Megaphone,
+  Milestone,
+  PieChart,
+  ShieldAlert,
   UsersRound,
+  Wallet,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -23,7 +30,7 @@ const groups = [
       { path: "/explorar-tfm", label: "Grupo", icon: UsersRound, content: "Presentación del equipo" },
       { path: "/justificacion", label: "Justificación", icon: FileText, content: "Objetivos y justificación" },
       { path: "/estudio-de-mercado", label: "Mercado", icon: BarChart3, content: "TAM/SAM/SOM, competencia" },
-      { path: "/producto", label: "Producto", icon: BookOpen, content: "Customer journey, pricing" },
+      { path: "/producto", label: "Journey", icon: BookOpen, content: "Customer journey, pricing" },
     ],
   },
   {
@@ -31,8 +38,61 @@ const groups = [
     color: "#3b82f6",
     sections: [
       { path: "/mapa-contenidos", label: "Mapa", icon: Map, content: "Inventario y clasificación" },
-      { path: "/desarrollo-web", label: "Desarrollo", icon: Code2, content: "Plantillas y navegación" },
+      {
+        path: "/objetivos-marketing",
+        label: "Objetivos",
+        icon: ListOrdered,
+        content: "Objetivos generales y KPIs a 12 meses",
+      },
       { path: "/marketing-digital", label: "Marketing", icon: Megaphone, content: "Plan de presupuesto por fases" },
+      {
+        path: "/marketing-estrategia",
+        label: "Estrategia",
+        icon: Milestone,
+        content: "Fases del embudo y canales",
+      },
+      {
+        path: "/marketing-embudo",
+        label: "Embudo",
+        icon: PieChart,
+        content: "Proyección y KPIs del funnel",
+      },
+      {
+        path: "/email-marketing",
+        label: "Email",
+        icon: Mail,
+        content: "Secuencias y automatización",
+      },
+    ],
+  },
+  {
+    type: "Viabilidad y cierre",
+    color: "#0d9488",
+    sections: [
+      {
+        path: "/kpis-marketing",
+        label: "KPIs",
+        icon: LayoutDashboard,
+        content: "Cuadro de mando por fase",
+      },
+      {
+        path: "/plan-financiero",
+        label: "Finanzas",
+        icon: Wallet,
+        content: "Proyección a 3 años",
+      },
+      {
+        path: "/plan-contingencias",
+        label: "Riesgos",
+        icon: ShieldAlert,
+        content: "Plan de contingencias",
+      },
+      {
+        path: "/conclusiones",
+        label: "Conclusiones",
+        icon: Flag,
+        content: "Síntesis del TFM",
+      },
     ],
   },
 ];
@@ -105,7 +165,7 @@ export function TfmContentMapSlide() {
 
         {/* Ramas: línea horizontal + 2 columnas */}
         <motion.div
-          className="relative min-h-0 flex-1 grid grid-cols-1 gap-4 sm:grid-cols-2"
+          className="relative min-h-0 flex-1 grid grid-cols-1 gap-4 md:grid-cols-3"
           variants={stagger}
         >
           {/* Línea horizontal conectora */}

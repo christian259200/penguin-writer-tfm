@@ -5,10 +5,18 @@ import {
   BookOpen,
   Building2,
   FileText,
+  Flag,
+  LayoutDashboard,
   Lightbulb,
+  ListOrdered,
+  Mail,
   Map,
   Megaphone,
+  Milestone,
+  PieChart,
+  ShieldAlert,
   Target,
+  Wallet,
 } from "lucide-react";
 import Link from "next/link";
 import type { ComponentType } from "react";
@@ -21,8 +29,15 @@ const iconMap: Record<string, ComponentType<{ className?: string }>> = {
   "/mapa-contenidos": Map,
   "/estudio-de-mercado": Building2,
   "/producto": Lightbulb,
-  "/desarrollo-web": FileText,
+  "/objetivos-marketing": ListOrdered,
   "/marketing-digital": Megaphone,
+  "/marketing-estrategia": Milestone,
+  "/marketing-embudo": PieChart,
+  "/email-marketing": Mail,
+  "/kpis-marketing": LayoutDashboard,
+  "/plan-financiero": Wallet,
+  "/plan-contingencias": ShieldAlert,
+  "/conclusiones": Flag,
 };
 
 const containerVariants = {

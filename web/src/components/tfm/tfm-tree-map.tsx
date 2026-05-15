@@ -65,13 +65,12 @@ const tfmTree: TreeNode = {
       ],
     },
     {
-      id: "desarrollo",
-      label: "Desarrollo web",
-      href: "/desarrollo-web",
+      id: "objetivos-marketing",
+      label: "Objetivos de marketing digital",
+      href: "/objetivos-marketing",
       children: [
-        { id: "dev-1", label: "Frontend" },
-        { id: "dev-2", label: "Backend" },
-        { id: "dev-3", label: "Base de datos" },
+        { id: "om-1", label: "Acciones y KPIs" },
+        { id: "om-2", label: "Plazo 12 meses" },
       ],
     },
     {
@@ -79,9 +78,20 @@ const tfmTree: TreeNode = {
       label: "Marketing digital",
       href: "/marketing-digital",
       children: [
-        { id: "mkt-1", label: "SEO" },
-        { id: "mkt-2", label: "Redes sociales" },
-        { id: "mkt-3", label: "Email marketing" },
+        { id: "mkt-1", label: "Presupuesto por fases" },
+        { id: "mkt-e", label: "Estrategia del embudo", href: "/marketing-estrategia" },
+        { id: "mkt-f", label: "Embudo proyectado", href: "/marketing-embudo" },
+        { id: "mkt-em", label: "Email marketing", href: "/email-marketing" },
+      ],
+    },
+    {
+      id: "cierre",
+      label: "Viabilidad y cierre",
+      children: [
+        { id: "c-kpi", label: "KPIs y cuadro de mando", href: "/kpis-marketing" },
+        { id: "c-fin", label: "Plan financiero", href: "/plan-financiero" },
+        { id: "c-cont", label: "Contingencias", href: "/plan-contingencias" },
+        { id: "c-conc", label: "Conclusiones", href: "/conclusiones" },
       ],
     },
   ],

@@ -37,9 +37,9 @@ const columns: Column[] = [
   {
     id: "c2",
     title: "Producto y operación",
-    subtitle: "Mercado, solución, web y marketing",
+    subtitle: "Producto y marketing",
     Icon: BookOpen,
-    items: tfmMainNav.slice(4, 8),
+    items: tfmMainNav.slice(4),
   },
 ];
 
